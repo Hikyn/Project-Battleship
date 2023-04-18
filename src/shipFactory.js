@@ -1,5 +1,3 @@
-import './style.css';
-
 const shipFactory = (length) => {
   let hitCount = 0;
   const hit = () => {

@@ -1,4 +1,4 @@
-import { shipFactory } from "./shipFactory";
+import { shipFactory } from "../src/shipFactory";
 import { test } from '@jest/globals';
 
 test('Ship factory: sunking works', () => {

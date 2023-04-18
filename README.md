@@ -1,6 +1,6 @@
 # Project-Battleship
 
-It was tought to set up this project. 
+It was tough to set up this project. 
 
 ## Problems encountered:
 I wanted to implement testing via **[Jest](https://jestjs.io/)**. I split my project into several modules

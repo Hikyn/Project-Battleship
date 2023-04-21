@@ -58,3 +58,7 @@ After changing code to this **[Jest](https://jestjs.io/)** started to correctly 
 ```js
 expect(() => { gameboard.placeShip(x, y, shipLength, orientation); }).toThrow("Out of bounds");
 ```
+
+> The issue here is that before Jest even knows anything about throwing an exception, we've already thrown it. An exception in that context will stop execution and fail. When we wrap it in an arrow function, we're not actually executing it yet and Jest can prepare for the exception 
+> 
+> --- **[scorgn](https://stackoverflow.com/users/2087587/scorgn)** on [this thread](https://stackoverflow.com/questions/49027595/jest-test-that-exception-will-be-thrown-isnt-working)

@@ -115,3 +115,34 @@ test('Gameboard: can hit any cell', () => {
     expect(() => { gameboard.receiveAttack(0, 2); }).not.toThrow("Cant hit same cell twice");
     expect(() => { gameboard.receiveAttack(2, 1); }).not.toThrow("Cant hit same cell twice");
 })
+
+test('Gameboard: checks if all ships are sunken', () => {
+    let length = 5;
+    let gameboard = gameboardFactory(length);
+    
+    let x = 2;
+    let y = 2;
+    let shipLength = 2;
+    let orientation = "horizontal";
+
+    gameboard.placeShip(x, y, shipLength, orientation)
+
+    x = 2;
+    y = 4;
+    shipLength = 2;
+    orientation = "horizontal";
+
+    gameboard.placeShip(x, y, shipLength, orientation)
+
+    expect(gameboard.isAllSunk()).toBe(false)
+
+    gameboard.receiveAttack(2,2)
+    gameboard.receiveAttack(3,2)
+
+    expect(gameboard.isAllSunk()).toBe(false)
+
+    gameboard.receiveAttack(2,4)
+    gameboard.receiveAttack(3,4)
+
+    expect(gameboard.isAllSunk()).toBe(true)
+})

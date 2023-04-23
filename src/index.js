@@ -1,5 +1,7 @@
 import './style.css';
 import './shipFactory.js';
+import './gameboardFactory.js';
+
 
 function component() {
     const element = document.createElement('div');

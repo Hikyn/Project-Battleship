@@ -20,8 +20,9 @@ test('Gameboard factory: places ship horizontally', () => {
     let orientation = "horizontal";
 
     gameboard.placeShip(x, y, shipLength, orientation);
-    expect(gameboard.cells[x][y].not.toBe(0 || 1));
-    expect(gameboard.cells[x + 1][y].not.toBe(0 || 1));
+
+    expect(gameboard.cells[x][y]).not.toBe(0 || 1);
+    expect(gameboard.cells[x + 1][y]).not.toBe(0 || 1);
 })
 
 test('Gameboard factory: places ship vertically', () => {
@@ -34,8 +35,9 @@ test('Gameboard factory: places ship vertically', () => {
     let orientation = "vertical";
 
     gameboard.placeShip(x, y, shipLength, orientation);
-    expect(gameboard.cells[x][y].not.toBe(0 || 1));
-    expect(gameboard.cells[x][y + 1].not.toBe(0 || 1));
+    
+    expect(gameboard.cells[x][y]).not.toBe(0 || 1);
+    expect(gameboard.cells[x][y + 1]).not.toBe(0 || 1);
 })
 
 test('Gameboard factory: ship does not go outbounds horizontally', () => {

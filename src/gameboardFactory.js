@@ -23,20 +23,18 @@ const gameboardFactory = (length) => {
             if ( (y + shipLength) >= length ) {
                 throw new Error('Out of bounds: vertical')
             }
+            for (let i = 0; i < shipLength; i++) {
+                cells[x][y + i] = ship
+            }
+
         } else if (orientation === "horizontal") {
             if ( (x + shipLength) >= length ) {
                 throw new Error('Out of bounds: horizontal')
             } 
+            for (let i = 0; i < shipLength; i++) {
+                cells[x + i][y] = ship
+            }
         }
-        
-
-
-
-        for (let i = 0; i < shipLength; i++) {
-            cells[x][y] = ship
-        }
-        cells[x][y] = ship
-        cells[x + 1][y] = ship
     }
 
     const receiveAttack = () => {

@@ -2,7 +2,8 @@ import { shipFactory } from "../src/shipFactory";
 
 const gameboardFactory = (length) => {
     let cells = new Array(length);
-    let missed = 0;
+    let missedShots = [];
+    let accurateShots = [];
 
     // Create double array
     for (let i = 0; i < length; i++) {
@@ -37,8 +38,26 @@ const gameboardFactory = (length) => {
         }
     }
 
-    const receiveAttack = () => {
-      
+    const receiveAttack = (x, y) => {
+        console.log(missedShots)
+        let hit = [x, y]
+        let missedShotsJson = JSON.stringify(missedShots);
+        let accurateShotsJson = JSON.stringify(accurateShots);
+        console.log(missedShotsJson)
+        console.log(accurateShotsJson)
+        if (missedShotsJson.includes(hit) == true || accurateShotsJson.includes(hit) == true) {
+            throw new Error('Cant hit same cell twice')
+        } else {
+            if (cells[x][y] == 0) {
+                missedShots.push([x, y])
+                
+            } else {
+                cells[x][y].hit()
+                accurateShots.push([x, y])
+            }
+            
+        }
+        
     }
 
     const isAllSunk = () => {

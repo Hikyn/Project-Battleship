@@ -46,8 +46,6 @@ const gameboardFactory = (length) => {
         let hit = [x, y]
         let missedShotsJson = JSON.stringify(missedShots);
         let accurateShotsJson = JSON.stringify(accurateShots);
-        console.log(missedShotsJson)
-        console.log(accurateShotsJson)
         if (missedShotsJson.includes(hit) == true || accurateShotsJson.includes(hit) == true) {
             throw new Error('Cant hit same cell twice')
         } else {

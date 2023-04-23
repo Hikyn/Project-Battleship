@@ -1,7 +1,7 @@
 import { gameboardFactory } from "../src/gameboardFactory";
 import { test } from '@jest/globals';
 
-test('Gameboard factory: creates correct length', () => {
+test('Gameboard: correct size', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     expect(gameboard.cells[length - 2][length - 2]).toBe(0);
@@ -10,7 +10,7 @@ test('Gameboard factory: creates correct length', () => {
     expect(gameboard.cells[length - 1][length - 1]).not.toBe(undefined);
 })
 
-test('Gameboard factory: places ship horizontally', () => {
+test('Gameboard: places ship horizontally', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -25,7 +25,7 @@ test('Gameboard factory: places ship horizontally', () => {
     expect(gameboard.cells[x + 1][y]).not.toBe(0);
 })
 
-test('Gameboard factory: places ship vertically', () => {
+test('Gameboard: places ship vertically', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -40,7 +40,7 @@ test('Gameboard factory: places ship vertically', () => {
     expect(gameboard.cells[x][y + 1]).not.toBe(0);
 })
 
-test('Gameboard factory: ship does not go outbounds horizontally', () => {
+test('Gameboard: ship does not go outbounds horizontally', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -52,7 +52,7 @@ test('Gameboard factory: ship does not go outbounds horizontally', () => {
     expect(() => { gameboard.placeShip(x, y, shipLength, orientation); }).toThrow("Out of bounds: horizontal");
 })
 
-test('Gameboard factory: ship does not go outbounds vertically', () => {
+test('Gameboard: ship does not go outbounds vertically', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -64,7 +64,7 @@ test('Gameboard factory: ship does not go outbounds vertically', () => {
     expect(() => { gameboard.placeShip(x, y, shipLength, orientation); }).toThrow("Out of bounds: vertical");
 })
 
-test('Gameboard factory: ship receive attacks correctly, happy path', () => {
+test('Gameboard: ship receive attacks correctly, happy path', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -79,7 +79,7 @@ test('Gameboard factory: ship receive attacks correctly, happy path', () => {
     expect(gameboard.cells[x][y].isSunk()).toBe(true);
 })
 
-test('Gameboard factory: cant hit same spot with ship twice', () => {
+test('Gameboard: cant hit same spot with ship twice', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -93,7 +93,7 @@ test('Gameboard factory: cant hit same spot with ship twice', () => {
     expect(() => { gameboard.receiveAttack(x, y); }).toThrow("Cant hit same cell twice");
 })
 
-test('Gameboard factory: cant hit same spot without ship twice', () => {
+test('Gameboard: cant hit same spot without ship twice', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
     
@@ -104,7 +104,7 @@ test('Gameboard factory: cant hit same spot without ship twice', () => {
     expect(() => { gameboard.receiveAttack(x, y); }).toThrow("Cant hit same cell twice");
 })
 
-test('Gameboard factory: can hit any cell', () => {
+test('Gameboard: can hit any cell', () => {
     let length = 5;
     let gameboard = gameboardFactory(length);
 

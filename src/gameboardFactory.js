@@ -4,6 +4,7 @@ const gameboardFactory = (length) => {
     let cells = new Array(length);
     let missedShots = [];
     let accurateShots = [];
+    let totalShipsLength = 0;
 
     // Create double array
     for (let i = 0; i < length; i++) {
@@ -27,6 +28,7 @@ const gameboardFactory = (length) => {
             for (let i = 0; i < shipLength; i++) {
                 cells[x][y + i] = ship
             }
+            totalShipsLength += shipLength
 
         } else if (orientation === "horizontal") {
             if ( (x + shipLength) >= length ) {
@@ -35,6 +37,7 @@ const gameboardFactory = (length) => {
             for (let i = 0; i < shipLength; i++) {
                 cells[x + i][y] = ship
             }
+            totalShipsLength += shipLength
         }
     }
 
@@ -61,7 +64,7 @@ const gameboardFactory = (length) => {
     }
 
     const isAllSunk = () => {
-
+        return accurateShots.length >= totalShipsLength ? true : false;
     }
     return { cells, receiveAttack, isAllSunk, placeShip }
   }

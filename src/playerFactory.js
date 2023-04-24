@@ -1,5 +1,12 @@
-const playerFactory = (name, gameboard, isStarting, isAi = false) => {
-    return { name, gameboard, isStarting, isAi }
-}
+const playerFactory = (name, gameboard, isAi = false) => {
+    const makeMove = () => {
+        if (isAi === true) {
+            // random coordinates
+        } else {
+            // wait for input
+        }
+    };
+    return { name, gameboard, isAi, makeMove };
+};
 
-export { playerFactory }
+export { playerFactory };

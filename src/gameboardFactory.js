@@ -40,15 +40,22 @@ const gameboardFactory = (length) => {
         }
     };
 
-    const receiveAttack = (x, y) => {
-        console.log(missedShots);
+    const isCellHit = (x, y) => {
         const hit = [x, y];
         const missedShotsJson = JSON.stringify(missedShots);
         const accurateShotsJson = JSON.stringify(accurateShots);
+
         if (
             missedShotsJson.includes(hit) === true ||
             accurateShotsJson.includes(hit) === true
         ) {
+            return true;
+        }
+        return false;
+    };
+
+    const receiveAttack = (x, y) => {
+        if (isCellHit(x, y)) {
             throw new Error('Cant hit same cell twice');
         } else if (cells[x][y] === 0) {
             console.log('Missed shot!');
@@ -62,7 +69,16 @@ const gameboardFactory = (length) => {
 
     const isAllSunk = () => accurateShots.length >= totalShipsLength;
 
-    return { cells, receiveAttack, isAllSunk, placeShip, length };
+    return {
+        cells,
+        receiveAttack,
+        isAllSunk,
+        placeShip,
+        length,
+        missedShots,
+        accurateShots,
+        isCellHit
+    };
 };
 
 export { gameboardFactory };

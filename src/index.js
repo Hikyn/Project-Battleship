@@ -12,6 +12,8 @@ const player1 = playerFactory('Me', gameboard1);
 player1.gameboard.placeShip(0, 0, 2, 'horizontal');
 player1.gameboard.placeShip(2, 2, 3, 'horizontal');
 player1.gameboard.placeShip(1, 3, 2, 'vertical');
+player1.gameboard.receiveAttack(2, 0);
+player1.gameboard.receiveAttack(2, 2);
 
 let target = document.querySelector('.gameboard-self');
 renderer.renderGameboard(target, player1.gameboard);

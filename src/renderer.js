@@ -18,10 +18,9 @@ const renderer = (() => {
                 }
 
                 if (cell === 0) {
-                    cellElement.textContent = 0;
+                    // cellElement.textContent = 0;
                     cellElement.classList.toggle('empty');
                 } else {
-                    cellElement.textContent = 1;
                     cellElement.classList.toggle('ship');
                     if (gameboard.cells[x][y].isSunk()) {
                         cellElement.classList.toggle('sunk');

@@ -67,8 +67,23 @@ body {
 
 .cell.hit {
   background-color: rgb(248, 208, 208);
+  
 }
 
 .cell.ship.hit.sunk {
   background-color: rgb(110, 94, 94);
+  
+}
+
+.cell.hit::before {
+  content: '•';
+  font-size: 2em;
+}
+
+.cell.ship::before {
+  content: '';
+}
+
+.cell.ship.hit::before {
+  content: 'X';
 }

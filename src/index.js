@@ -20,5 +20,14 @@ renderer.renderGameboard(target, player1.gameboard);
 
 const gameboard2 = gameboardFactory(6);
 const player2 = playerFactory('Computer', gameboard2, true);
+player2.gameboard.placeShip(1, 0, 2, 'horizontal');
+player2.gameboard.placeShip(1, 2, 3, 'vertical');
+player2.gameboard.placeShip(3, 4, 2, 'horizontal');
+player2.gameboard.receiveAttack(2, 0);
+player2.gameboard.receiveAttack(1, 0);
+player2.gameboard.receiveAttack(2, 2);
+
+target = document.querySelector('.gameboard-enemy');
+renderer.renderGameboard(target, player2.gameboard);
 
 //gameloop(5);

@@ -23,6 +23,9 @@ const renderer = (() => {
                 } else {
                     cellElement.textContent = 1;
                     cellElement.classList.toggle('ship');
+                    if (gameboard.cells[x][y].isSunk()) {
+                        cellElement.classList.toggle('sunk');
+                    }
                 }
                 columnElement.appendChild(cellElement);
                 y += 1;

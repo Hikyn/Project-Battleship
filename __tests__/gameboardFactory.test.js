@@ -67,6 +67,28 @@ test('Gameboard: ship does not go outbounds vertically', () => {
     }).toThrow('Out of bounds: vertical');
 });
 
+test('Gameboard: ships does not overlap (1)', () => {
+    const length = 6;
+    const gameboard = gameboardFactory(length);
+
+    gameboard.placeShip(1, 2, 3, 'vertical');
+
+    expect(() => {
+        gameboard.placeShip(1, 4, 2, 'horizontal');
+    }).toThrow('Ships are overlapping');
+});
+
+test('Gameboard: ships does not overlap (2)', () => {
+    const length = 6;
+    const gameboard = gameboardFactory(length);
+
+    gameboard.placeShip(1, 2, 3, 'vertical');
+
+    expect(() => {
+        gameboard.placeShip(1, 4, 2, 'vertical');
+    }).toThrow('Ships are overlapping');
+});
+
 test('Gameboard: ship receive attacks correctly, happy path', () => {
     const length = 5;
     const gameboard = gameboardFactory(length);

@@ -89,7 +89,8 @@ expect(() => { gameboard.placeShip(x, y, shipLength, orientation); }).toThrow("O
 ```
 2. Placing ships
 
-    2.1. Player can place ships by selecting ship model below gameboard and drag-dropping it on gameboard
+    2.1. Player can place ships by selecting ship model 
+                            and drag-dropping it on gameboard
 
     2.2. After every ship is placed, this function is disabled
 ```

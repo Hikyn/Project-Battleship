@@ -20,9 +20,18 @@ const gameboardFactory = (length) => {
 
     const placeShip = (x, y, shipLength, orientation) => {
         const ship = shipFactory(shipLength);
+        for (let i = 0; i < shipLength; i += 1) {
+            if (orientation === 'vertical') {
+                if (cells[x][y + i] !== undefined && cells[x][y + i] !== 0) {
+                    throw new Error('Ships are overlapping');
+                }
+            } else if (cells[x + i] !== undefined && cells[x + i][y] !== 0) {
+                throw new Error('Ships are overlapping');
+            }
+        }
 
         if (orientation === 'vertical') {
-            if (y + shipLength >= length) {
+            if (y + shipLength > length) {
                 throw new Error('Out of bounds: vertical');
             }
             for (let i = 0; i < shipLength; i += 1) {
@@ -30,7 +39,7 @@ const gameboardFactory = (length) => {
             }
             totalShipsLength += shipLength;
         } else if (orientation === 'horizontal') {
-            if (x + shipLength >= length) {
+            if (x + shipLength > length) {
                 throw new Error('Out of bounds: horizontal');
             }
             for (let i = 0; i < shipLength; i += 1) {

@@ -2,6 +2,16 @@
 
 It was tough to set up this project. 
 
+# ToC
+
+-   [Problems Encountered](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#problems-encountered)
+    -   [Jest and webpack](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#problems-encountered)
+    -   [Jest and weird way to catch errors](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#jest-and-weird-way-to-catch-errors)
+-   [Main game loop](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#main-game-loop)
+    -   [Start](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#start)
+    -   [Ship placement](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#ship-placement)
+    -   [Taking turns](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#taking-turns)
+
 ## Problems encountered:
 
 ### Jest and webpack

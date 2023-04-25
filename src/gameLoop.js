@@ -1,6 +1,7 @@
 import { playerFactory } from './playerFactory';
 import { shipFactory } from './shipFactory';
 import { gameboardFactory } from './gameboardFactory';
+import { renderer } from './renderer';
 
 function gameloop(gameboardLength) {
     const gameboard1 = gameboardFactory(gameboardLength);

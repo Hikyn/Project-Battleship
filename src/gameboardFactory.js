@@ -61,6 +61,7 @@ const gameboardFactory = (length) => {
     };
 
     const isAllSunk = () => accurateShots.length >= totalShipsLength;
+
     return { cells, receiveAttack, isAllSunk, placeShip, length };
 };
 

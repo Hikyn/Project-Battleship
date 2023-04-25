@@ -1,16 +1,22 @@
 import './style.css';
-import './shipFactory.js';
-import './gameboardFactory.js';
+import { shipFactory } from './shipFactory';
+import { gameboardFactory } from './gameboardFactory';
+import { playerFactory } from './playerFactory';
+import { renderer } from './renderer';
 import { gameloop } from './gameLoop.js';
 
-function component() {
-    const element = document.createElement('div');
+console.log('Scripts are working');
 
-    // Lodash, currently included via a script, is required for this line to work
-    element.innerHTML = 'Hello webpack';
-    element.classList.toggle('hello');
-    return element;
-}
+const gameboard1 = gameboardFactory(6);
+const player1 = playerFactory('Me', gameboard1);
+player1.gameboard.placeShip(0, 0, 2, 'horizontal');
+player1.gameboard.placeShip(2, 2, 3, 'horizontal');
+player1.gameboard.placeShip(1, 3, 2, 'vertical');
 
-document.body.appendChild(component());
-gameloop(5);
+let target = document.querySelector('.gameboard-self');
+renderer.renderGameboard(target, player1.gameboard);
+
+const gameboard2 = gameboardFactory(6);
+const player2 = playerFactory('Computer', gameboard2, true);
+
+//gameloop(5);

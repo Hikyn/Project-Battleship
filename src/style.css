@@ -13,28 +13,25 @@ html {
 }
 
 body {
-  background-image: linear-gradient();
+  height: 100vh;
 }
 
 .main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  overflow: hidden;
 }
 
 .gameboard {
   display: flex;
   flex-direction: row;
+  height: fit-content;
 }
 
 .column {
   display: flex;
   flex-direction: column;
-}
-
-.gameboard-enemy {
-  display: grid;
-  grid: 1fr 1fr 1fr 1fr 1fr 1fr/1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .header {
@@ -45,6 +42,7 @@ body {
 .your-side,
 .enemy-side {
   margin:2rem;
+  height: fit-content;
 }
 
 .cell {

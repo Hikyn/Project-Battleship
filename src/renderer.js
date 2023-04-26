@@ -10,7 +10,7 @@ const renderer = (() => {
             const columnElement = document.createElement('div');
             columnElement.classList.toggle('column');
             column.forEach((cell) => {
-                const cellElement = document.createElement('div');
+                const cellElement = document.createElement('button');
                 cellElement.classList.toggle('cell');
                 // If cell was hit before, we will style it appropriately
                 if (gameboard.isCellHit(x, y)) {

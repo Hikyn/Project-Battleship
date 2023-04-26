@@ -15,9 +15,7 @@ function gameloop(gameboardLength) {
     const gameboard2 = gameboardFactory(gameboardLength);
     target = document.querySelector('.gameboard-enemy');
     const player2 = playerFactory('Computer', gameboard2, target, true);
-    player2.gameboard.placeShip(1, 0, 2, 'horizontal');
-    player2.gameboard.placeShip(1, 2, 3, 'vertical');
-    player2.gameboard.placeShip(3, 4, 2, 'horizontal');
+    player2.gameboard.randomlyPlaceAllShips();
 
     renderer.renderGameboard(player2);
     renderer.listenForAttacks(player2, player1);

@@ -4,7 +4,7 @@ const gameboardFactory = (length) => {
     const cells = new Array(length);
     const missedShots = [];
     const accurateShots = [];
-    let availableShips = [5, 4, 3, 3, 2];
+    let availableShips = [5, 4, 3, 2];
     let totalShipsLength = 0;
 
     // Create double array
@@ -94,6 +94,27 @@ const gameboardFactory = (length) => {
             console.log(availableShips);
         }
     }
+
+    const randomlyPlaceAllShips = () => {
+        while (availableShips.length > 0) {
+            const randomX = Math.floor(Math.random() * length);
+            const randomY = Math.floor(Math.random() * length);
+            const randomOrientation = Math.floor(Math.random() * 2);
+            let orientation;
+            if (randomOrientation === 0) {
+                orientation = 'horizontal';
+            } else if (randomOrientation === 1) {
+                orientation = 'vertical';
+            }
+
+            try {
+                placeShip(randomX, randomY, availableShips[0], orientation);
+                removeAvailableShip(0);
+            } catch (error) {
+                randomlyPlaceAllShips();
+            }
+        }
+    }
     return {
         cells,
         receiveAttack,
@@ -104,7 +125,8 @@ const gameboardFactory = (length) => {
         accurateShots,
         availableShips,
         isCellHit,
-        removeAvailableShip
+        removeAvailableShip,
+        randomlyPlaceAllShips
     };
 };
 

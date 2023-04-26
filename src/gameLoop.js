@@ -27,7 +27,7 @@ function gameloop(gameboardLength) {
     player2.gameboard.receiveAttack(2, 2);
 
     renderer.renderGameboard(player2);
-    renderer.addEventListenersToCells(player2, player1);
+    renderer.listenForAttacks(player2, player1);
 }
 
 export { gameloop };

@@ -36,30 +36,30 @@ const renderer = (() => {
         });
     };
 
-    const addEventListenersToCells = (player, enemyPlayer) => {
-        const target = player.gameboardElement;
-        const targetChildren = target.children;
-        for (let i = 0; i < targetChildren.length; i += 1) {
-            const column = targetChildren[i];
-            const columnChildren = column.children;
-            for (let j = 0; j < columnChildren.length; j += 1) {
-                columnChildren[j].addEventListener('click', () => {
-                    player.gameboard.receiveAttack(i,j);
-                    if (player.isLost()) {
-                        console.log(`Player ${player.name} loses!`);
+    const listenForAttacks = (defendingPlayer, attackingPlayer) => {
+        const target = defendingPlayer.gameboardElement;
+        const columns = target.children;
+        for (let i = 0; i < columns.length; i += 1) {
+            const column = columns[i];
+            const cells = column.children;
+            for (let j = 0; j < cells.length; j += 1) {
+                cells[j].addEventListener('click', () => {
+                    defendingPlayer.gameboard.receiveAttack(i, j);
+                    if (defendingPlayer.isLost()) {
+                        console.log(`Player ${defendingPlayer.name} loses!`);
                     }
-                    renderGameboard(player);
-                    addEventListenersToCells(player, enemyPlayer);
+                    renderGameboard(defendingPlayer);
+                    listenForAttacks(defendingPlayer, attackingPlayer);
                     // Ai makes a move
-                    player.makeMove(enemyPlayer);
-                    renderGameboard(enemyPlayer);
+                    defendingPlayer.makeMove(attackingPlayer);
+                    renderGameboard(attackingPlayer);
                 });
             }
         }
     };
     return {
         renderGameboard,
-        addEventListenersToCells
+        listenForAttacks
     };
 })();
 

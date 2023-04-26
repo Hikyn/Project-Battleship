@@ -2,8 +2,9 @@ import { shipFactory } from './shipFactory.js';
 import { gameboardFactory } from './gameboardFactory.js';
 
 const renderer = (() => {
-    const renderGameboard = (targetParent, player) => {
+    const renderGameboard = (player) => {
         // Renders gameboard and appends to target element
+        const targetParent = player.gameboardElement;
         targetParent.textContent = '';
         let x = 0;
         player.gameboard.cells.forEach((column) => {
@@ -35,7 +36,8 @@ const renderer = (() => {
         });
     };
 
-    const addEventListenersToCells = (target, player) => {
+    const addEventListenersToCells = (player, enemyPlayer) => {
+        const target = player.gameboardElement;
         const targetChildren = target.children;
         for (let i = 0; i < targetChildren.length; i += 1) {
             const column = targetChildren[i];
@@ -46,12 +48,15 @@ const renderer = (() => {
                     if (player.isLost()) {
                         console.log(`Player ${player.name} loses!`);
                     }
-                    renderGameboard(target, player);
-                    addEventListenersToCells(target, player);
+                    renderGameboard(player);
+                    addEventListenersToCells(player, enemyPlayer);
+                    // Ai makes a move
+                    player.makeMove(enemyPlayer);
+                    renderGameboard(enemyPlayer);
                 });
             }
         }
-    }
+    };
     return {
         renderGameboard,
         addEventListenersToCells

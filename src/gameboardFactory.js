@@ -20,6 +20,12 @@ const gameboardFactory = (length) => {
     }
 
     const placeShip = (x, y, shipLength, orientation) => {
+        // eslint-disable-next-line no-param-reassign
+        x = Number(x);
+        // eslint-disable-next-line no-param-reassign
+        y = Number(y);
+        // eslint-disable-next-line no-param-reassign
+        shipLength = Number(shipLength);
         const ship = shipFactory(shipLength);
         for (let i = 0; i < shipLength; i += 1) {
             if (orientation === 'vertical') {
@@ -32,7 +38,8 @@ const gameboardFactory = (length) => {
         }
 
         if (orientation === 'vertical') {
-            if (y + shipLength > length) {
+            if (+y + shipLength > length) {
+                console.log(`${y + shipLength} > ${length}`);
                 throw new Error('Out of bounds: vertical');
             }
             for (let i = 0; i < shipLength; i += 1) {
@@ -40,7 +47,8 @@ const gameboardFactory = (length) => {
             }
             totalShipsLength += shipLength;
         } else if (orientation === 'horizontal') {
-            if (x + shipLength > length) {
+            if (+x + shipLength > length) {
+                console.log(`${x + shipLength} > ${length}`);
                 throw new Error('Out of bounds: horizontal');
             }
             for (let i = 0; i < shipLength; i += 1) {
@@ -80,6 +88,12 @@ const gameboardFactory = (length) => {
 
     const isAllSunk = () => accurateShots.length >= totalShipsLength;
 
+    const removeAvailableShip = (index) => {
+        if (index !== -1) {
+            availableShips.splice(index, 1);
+            console.log(availableShips);
+        }
+    }
     return {
         cells,
         receiveAttack,
@@ -89,7 +103,8 @@ const gameboardFactory = (length) => {
         missedShots,
         accurateShots,
         availableShips,
-        isCellHit
+        isCellHit,
+        removeAvailableShip
     };
 };
 

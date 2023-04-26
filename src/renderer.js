@@ -34,6 +34,7 @@ const renderer = (() => {
             x += 1;
             targetParent.appendChild(columnElement);
         });
+        listenForShipPlacement(player);
     };
 
     const listenForAttacks = (defendingPlayer, attackingPlayer) => {
@@ -60,6 +61,11 @@ const renderer = (() => {
 
     const renderAvailableShips = (player) => {
         const target = document.querySelector('.ships-to-place');
+        target.textContent = '';
+
+        const message = document.createElement('div');
+        message.textContent = 'Available ships';
+        target.appendChild(message);
 
         const { availableShips } = player.gameboard;
         availableShips.forEach((ship) => {
@@ -87,10 +93,45 @@ const renderer = (() => {
             });
         });
     };
+
+    const listenForShipPlacement = (player) => {
+        const target = player.gameboardElement;
+        const columns = target.children;
+        for (let i = 0; i < columns.length; i += 1) {
+            const column = columns[i];
+            const cells = column.children;
+            for (let j = 0; j < cells.length; j += 1) {
+                cells[j].addEventListener('click', () => {
+                    if (player.selectedElement !== undefined) {
+                        const shipLength =
+                            player.selectedElement.getAttribute('length');
+                        console.log(shipLength);
+                        console.log(i, j);
+
+                        player.gameboard.placeShip(
+                            i,
+                            j,
+                            shipLength,
+                            'horizontal'
+                        );
+                        const removeIndex =
+                            player.gameboard.availableShips.indexOf(
+                                Number(shipLength)
+                            );
+                        player.gameboard.removeAvailableShip(removeIndex);
+
+                        renderGameboard(player);
+                        renderAvailableShips(player);
+                    }
+                });
+            }
+        }
+    }
     return {
         renderGameboard,
         listenForAttacks,
-        renderAvailableShips
+        renderAvailableShips,
+        listenForShipPlacement
     };
 })();
 

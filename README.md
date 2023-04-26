@@ -97,7 +97,7 @@ expect(() => { gameboard.placeShip(x, y, shipLength, orientation); }).toThrow("O
 > 
 > --- **[scorgn](https://stackoverflow.com/users/2087587/scorgn)** on [this thread](https://stackoverflow.com/questions/49027595/jest-test-that-exception-will-be-thrown-isnt-working)
 
-## Main game loop
+## TO DO: Main game loop
 
 ### Start
 ```

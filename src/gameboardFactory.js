@@ -74,6 +74,7 @@ const gameboardFactory = (length) => {
             cells[x][y].hit();
             accurateShots.push([x, y]);
         }
+        return isAllSunk();
     };
 
     const isAllSunk = () => accurateShots.length >= totalShipsLength;

@@ -6,7 +6,9 @@ const playerFactory = (name, gameboard, isAi = false) => {
             // wait for input
         }
     };
-    return { name, gameboard, isAi, makeMove };
+
+    const isLost = () => gameboard.isAllSunk();
+    return { name, gameboard, isAi, makeMove, isLost };
 };
 
 export { playerFactory };

@@ -16,7 +16,7 @@ player1.gameboard.receiveAttack(2, 0);
 player1.gameboard.receiveAttack(2, 2);
 
 let target = document.querySelector('.gameboard-self');
-renderer.renderGameboard(target, player1.gameboard);
+renderer.renderGameboard(target, player1);
 
 const gameboard2 = gameboardFactory(6);
 const player2 = playerFactory('Computer', gameboard2, true);
@@ -28,6 +28,7 @@ player2.gameboard.receiveAttack(1, 0);
 player2.gameboard.receiveAttack(2, 2);
 
 target = document.querySelector('.gameboard-enemy');
-renderer.renderGameboard(target, player2.gameboard);
+renderer.renderGameboard(target, player2);
+renderer.addEventListenersToCells(target, player2);
 
 //gameloop(5);

@@ -15,6 +15,7 @@ function gameloop(gameboardLength) {
     player1.gameboard.receiveAttack(2, 2);
 
     renderer.renderGameboard(player1);
+    renderer.renderAvailableShips(player1);
 
     const gameboard2 = gameboardFactory(gameboardLength);
     target = document.querySelector('.gameboard-enemy');

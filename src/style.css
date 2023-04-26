@@ -113,3 +113,30 @@ button.cell.empty:not(.hit):hover {
 button.cell.empty.hit:hover {
   --rgb: 199, 95, 95;
 }
+
+.ships-to-place {
+  margin: 3rem 0rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ship-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.available.cell {
+  --rgb: 27, 133, 137;
+  background-color: rgb(var(--rgb));
+  border: 1px solid white;
+}
+
+.available.cell:hover {
+  cursor: pointer;
+}
+
+.selected .cell {
+  --rgb: 53, 58, 203;
+  background-color: rgb(var(--rgb));
+}

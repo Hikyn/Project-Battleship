@@ -4,6 +4,7 @@ const gameboardFactory = (length) => {
     const cells = new Array(length);
     const missedShots = [];
     const accurateShots = [];
+    let availableShips = [5, 4, 3, 3, 2];
     let totalShipsLength = 0;
 
     // Create double array
@@ -87,6 +88,7 @@ const gameboardFactory = (length) => {
         length,
         missedShots,
         accurateShots,
+        availableShips,
         isCellHit
     };
 };

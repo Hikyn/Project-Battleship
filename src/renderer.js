@@ -57,9 +57,40 @@ const renderer = (() => {
             }
         }
     };
+
+    const renderAvailableShips = (player) => {
+        const target = document.querySelector('.ships-to-place');
+
+        const { availableShips } = player.gameboard;
+        availableShips.forEach((ship) => {
+            const wholeShip = document.createElement('div');
+            wholeShip.classList.toggle('ship-container');
+            wholeShip.setAttribute('length', `${ship}`);
+            for (let i = 0; i < ship; i += 1) {
+                const partOfShip = document.createElement('div');
+                partOfShip.classList.toggle('available');
+                partOfShip.classList.toggle('cell');
+                wholeShip.appendChild(partOfShip);
+            }
+            target.appendChild(wholeShip);
+            wholeShip.addEventListener('click', () => {
+                if (player.selectedElement !== wholeShip) {
+                    for (let i = 0; i < target.children.length; i += 1) {
+                        target.children[i].classList.remove('selected');
+                    }
+                    player.selectedElement = wholeShip;
+                    wholeShip.classList.add('selected');
+                } else {
+                    player.selectedElement = undefined;
+                    wholeShip.classList.remove('selected');
+                }
+            });
+        });
+    };
     return {
         renderGameboard,
-        listenForAttacks
+        listenForAttacks,
+        renderAvailableShips
     };
 })();
 

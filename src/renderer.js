@@ -60,12 +60,34 @@ const renderer = (() => {
     };
 
     const renderAvailableShips = (player) => {
-        const target = document.querySelector('.ships-to-place');
-        target.textContent = '';
+        const fleet = document.querySelector('.fleet');
+        fleet.textContent = '';
 
         const message = document.createElement('div');
         message.textContent = 'Available ships';
-        target.appendChild(message);
+        fleet.appendChild(message);
+
+        const changeOrientation = document.createElement('button');
+        changeOrientation.classList.add('button-orientation');
+        changeOrientation.textContent = player.selectedOrientation;
+        fleet.appendChild(changeOrientation);
+        changeOrientation.addEventListener('click', () => {
+            if (player.selectedOrientation === 'horizontal') {
+                player.selectedOrientation = 'vertical';
+            } else {
+                player.selectedOrientation = 'horizontal';
+            }
+            renderAvailableShips(player);
+        });
+
+        const target = document.createElement('div');
+        target.classList.toggle('ships-to-place');
+        fleet.appendChild(target);
+
+        target.textContent = '';
+        target.classList.remove('vertical');
+        target.classList.remove('horizontal');
+        target.classList.add(`${player.selectedOrientation}`);
 
         const { availableShips } = player.gameboard;
         availableShips.forEach((ship) => {
@@ -112,7 +134,7 @@ const renderer = (() => {
                             i,
                             j,
                             shipLength,
-                            'horizontal'
+                            player.selectedOrientation
                         );
                         const removeIndex =
                             player.gameboard.availableShips.indexOf(

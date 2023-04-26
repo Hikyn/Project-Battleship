@@ -115,15 +115,37 @@ button.cell.empty.hit:hover {
 }
 
 .ships-to-place {
-  margin: 3rem 0rem;
+  margin: 1rem 0rem;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.ship-container {
+.ships-to-place.horizontal {
+  display: flex;
+  flex-direction: column;
+}
+
+.ships-to-place.vertical {
   display: flex;
   flex-direction: row;
+}
+
+.ships-to-place.vertical .ship-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ships-to-place.horizontal .ship-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.ship-container {
+  box-sizing: border-box;
+  border: 0.3rem solid rgb(128, 0, 0);
+  width: fit-content;
+  height: fit-content;
 }
 
 .available.cell {
@@ -139,4 +161,16 @@ button.cell.empty.hit:hover {
 .selected .cell {
   --rgb: 53, 58, 203;
   background-color: rgb(var(--rgb));
+}
+
+.fleet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-orientation {
+  width: 6rem;
+  padding: 1rem;
 }

@@ -1,3 +1,5 @@
+import { gameboardFactory } from './gameboardFactory';
+
 const renderer = (() => {
     const renderPlacementScreen = (
         player,
@@ -32,6 +34,10 @@ const renderer = (() => {
         const resetButton = document.createElement('button');
         resetButton.classList.add('btn-reset');
         resetButton.textContent = 'Reset';
+        resetButton.addEventListener('click', () => {
+            player.gameboard = gameboardFactory(player.gameboard.length);
+            renderPlacementScreen(player, targetParent);
+        });
 
         const buttons = document.createElement('div');
         buttons.classList.add('btns');

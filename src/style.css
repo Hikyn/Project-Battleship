@@ -192,11 +192,22 @@ button.cell.empty.hit:hover {
 }
 
 .pop-Up-Screen .main {
+  display: grid;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  grid: 1fr / 1fr 1fr;
+  justify-content: center;
+}
+
+.pop-Up-Screen .main .gameboard {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  gap: 3rem;
-  
+  justify-content: center;
+}
+
+.pop-Up-Screen .main .pop-Up-AvailableShips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pop-Up-Screen .title {

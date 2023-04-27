@@ -4,19 +4,24 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
     const cells = new Array(length);
     const missedShots = [];
     const accurateShots = [];
+    const initialShips = [...availableShips];
     let totalShipsLength = 0;
 
     // Create double array
-    for (let i = 0; i < length; i += 1) {
-        cells[i] = new Array(length);
-    }
-
-    // Populate double array with 0
-    for (let i = 0; i < length; i += 1) {
-        for (let j = 0; j < length; j += 1) {
-            cells[i][j] = 0;
+    const initializeCells = () => {
+        for (let i = 0; i < length; i += 1) {
+            cells[i] = new Array(length);
         }
-    }
+
+        // Populate double array with 0
+        for (let i = 0; i < length; i += 1) {
+            for (let j = 0; j < length; j += 1) {
+                cells[i][j] = 0;
+            }
+        }
+    };
+
+    initializeCells();
 
     const placeShip = (x, y, shipLength, orientation) => {
         // eslint-disable-next-line no-param-reassign
@@ -120,6 +125,7 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
             }
         }
     };
+
     return {
         cells,
         receiveAttack,

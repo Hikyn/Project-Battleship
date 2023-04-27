@@ -159,7 +159,7 @@ test('Gameboard: can hit any cell', () => {
 
 test('Gameboard: checks if all ships are sunken', () => {
     const length = 5;
-    const gameboard = gameboardFactory(length);
+    const gameboard = gameboardFactory(length, [2, 2]);
 
     let x = 2;
     let y = 2;

@@ -46,6 +46,11 @@ const renderer = (() => {
             const cells = column.children;
             for (let j = 0; j < cells.length; j += 1) {
                 cells[j].addEventListener('click', () => {
+                    if (!attackingPlayer.isAllShipsPlaced()) {
+                        console.log(`Player ${attackingPlayer.name} has not finished placing ships`);
+                        console.log(`Remaining ships: ${attackingPlayer.gameboard.availableShips}`);
+                        return;
+                    }
                     defendingPlayer.gameboard.receiveAttack(i, j);
                     if (defendingPlayer.isLost()) {
                         console.log(`Player ${defendingPlayer.name} loses!`);
@@ -128,8 +133,8 @@ const renderer = (() => {
                     if (player.selectedElement !== undefined) {
                         const shipLength =
                             player.selectedElement.getAttribute('length');
-                        console.log(shipLength);
-                        console.log(i, j);
+                        // console.log(shipLength);
+                        // console.log(i, j);
 
                         player.gameboard.placeShip(
                             i,

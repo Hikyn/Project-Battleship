@@ -1,10 +1,9 @@
 import { shipFactory } from './shipFactory';
 
-const gameboardFactory = (length) => {
+const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
     const cells = new Array(length);
     const missedShots = [];
     const accurateShots = [];
-    let availableShips = [5, 4, 3, 2];
     let totalShipsLength = 0;
 
     // Create double array
@@ -26,6 +25,9 @@ const gameboardFactory = (length) => {
         y = Number(y);
         // eslint-disable-next-line no-param-reassign
         shipLength = Number(shipLength);
+        if (!availableShips.includes(shipLength)) {
+            throw new Error('There are no available ships with that length');
+        }
         const ship = shipFactory(shipLength);
         for (let i = 0; i < shipLength; i += 1) {
             if (orientation === 'vertical') {
@@ -39,7 +41,7 @@ const gameboardFactory = (length) => {
 
         if (orientation === 'vertical') {
             if (+y + shipLength > length) {
-                console.log(`${y + shipLength} > ${length}`);
+                // console.log(`${y + shipLength} > ${length}`);
                 throw new Error('Out of bounds: vertical');
             }
             for (let i = 0; i < shipLength; i += 1) {
@@ -48,7 +50,7 @@ const gameboardFactory = (length) => {
             totalShipsLength += shipLength;
         } else if (orientation === 'horizontal') {
             if (+x + shipLength > length) {
-                console.log(`${x + shipLength} > ${length}`);
+                // console.log(`${x + shipLength} > ${length}`);
                 throw new Error('Out of bounds: horizontal');
             }
             for (let i = 0; i < shipLength; i += 1) {
@@ -56,6 +58,7 @@ const gameboardFactory = (length) => {
             }
             totalShipsLength += shipLength;
         }
+        removeAvailableShip(availableShips.indexOf(shipLength));
     };
 
     const isCellHit = (x, y) => {
@@ -76,10 +79,10 @@ const gameboardFactory = (length) => {
         if (isCellHit(x, y)) {
             throw new Error('Cant hit same cell twice');
         } else if (cells[x][y] === 0) {
-            console.log('Missed shot!');
+            // console.log('Missed shot!');
             missedShots.push([x, y]);
         } else {
-            console.log('Accurate shot!');
+            // console.log('Accurate shot!');
             cells[x][y].hit();
             accurateShots.push([x, y]);
         }
@@ -91,7 +94,7 @@ const gameboardFactory = (length) => {
     const removeAvailableShip = (index) => {
         if (index !== -1) {
             availableShips.splice(index, 1);
-            console.log(availableShips);
+            // console.log(availableShips);
         }
     }
 

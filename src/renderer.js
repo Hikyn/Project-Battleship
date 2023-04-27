@@ -179,6 +179,7 @@ const renderer = (() => {
             } else {
                 player.selectedOrientation = 'horizontal';
             }
+            player.selectedElement = undefined;
             renderAvailableShips(player);
         });
 
@@ -203,6 +204,7 @@ const renderer = (() => {
                 wholeShip.appendChild(partOfShip);
             }
             target.appendChild(wholeShip);
+
             wholeShip.addEventListener('click', () => {
                 if (player.selectedElement !== wholeShip) {
                     for (let i = 0; i < target.children.length; i += 1) {

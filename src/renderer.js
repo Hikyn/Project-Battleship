@@ -21,11 +21,31 @@ const renderer = (() => {
         const popUpAvailableShips = document.createElement('div');
         popUpAvailableShips.classList.add('pop-Up-AvailableShips');
 
+        const randomButton = document.createElement('button');
+        randomButton.classList.add('btn-retry');
+        randomButton.textContent = 'Random';
+
+        const finishButton = document.createElement('button');
+        finishButton.classList.add('btn-finish');
+        finishButton.textContent = 'Finish';
+
+        const resetButton = document.createElement('button');
+        resetButton.classList.add('btn-reset');
+        resetButton.textContent = 'Reset';
+
+        const buttons = document.createElement('div');
+        buttons.classList.add('btns');
+
+        buttons.appendChild(randomButton);
+        buttons.appendChild(finishButton);
+        buttons.appendChild(resetButton);
+
         popUpMain.appendChild(popUpGameboard);
         popUpMain.appendChild(popUpAvailableShips);
 
         popUpScreen.appendChild(popUpTitle);
         popUpScreen.appendChild(popUpMain);
+        popUpScreen.appendChild(buttons);
 
         targetParent.appendChild(popUpScreen);
 

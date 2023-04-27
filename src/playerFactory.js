@@ -12,6 +12,8 @@ const playerFactory = (name, gameboard, gameboardElement, isAi = false) => {
         }
     };
 
+    const isAllShipsPlaced = () => gameboard.availableShips.length <= 0;
+
     const isLost = () => gameboard.isAllSunk();
     return {
         name,
@@ -21,7 +23,8 @@ const playerFactory = (name, gameboard, gameboardElement, isAi = false) => {
         isLost,
         gameboardElement,
         selectedElement,
-        selectedOrientation
+        selectedOrientation,
+        isAllShipsPlaced
     };
 };
 

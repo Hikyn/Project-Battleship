@@ -191,59 +191,75 @@ const renderer = (() => {
     ) => {
         targetParent.textContent = '';
 
-        const message = document.createElement('div');
-        message.textContent = 'Available ships';
-        targetParent.appendChild(message);
+        const createMessage = (text) => {
+            const message = document.createElement('div');
+            message.textContent = `${text}`;
+            return message;
+        };
 
-        const changeOrientation = document.createElement('button');
-        changeOrientation.classList.add('button-orientation');
-        changeOrientation.textContent = player.selectedOrientation;
-        targetParent.appendChild(changeOrientation);
-        changeOrientation.addEventListener('click', () => {
-            if (player.selectedOrientation === 'horizontal') {
-                player.selectedOrientation = 'vertical';
-            } else {
-                player.selectedOrientation = 'horizontal';
-            }
-            player.selectedElement = undefined;
-            renderAvailableShips(player);
-        });
+        const createOrientationButton = () => {
+            const orientationButton = document.createElement('button');
+            orientationButton.classList.add('button-orientation');
+            orientationButton.textContent = player.selectedOrientation;
 
-        const target = document.createElement('div');
-        target.classList.toggle('ships-to-place');
-        targetParent.appendChild(target);
-
-        target.textContent = '';
-        target.classList.remove('vertical');
-        target.classList.remove('horizontal');
-        target.classList.add(`${player.selectedOrientation}`);
-
-        const { availableShips } = player.gameboard;
-        availableShips.forEach((ship) => {
-            const wholeShip = document.createElement('div');
-            wholeShip.classList.toggle('ship-container');
-            wholeShip.setAttribute('length', `${ship}`);
-            for (let i = 0; i < ship; i += 1) {
-                const partOfShip = document.createElement('div');
-                partOfShip.classList.toggle('available');
-                partOfShip.classList.toggle('cell');
-                wholeShip.appendChild(partOfShip);
-            }
-            target.appendChild(wholeShip);
-
-            wholeShip.addEventListener('click', () => {
-                if (player.selectedElement !== wholeShip) {
-                    for (let i = 0; i < target.children.length; i += 1) {
-                        target.children[i].classList.remove('selected');
-                    }
-                    player.selectedElement = wholeShip;
-                    wholeShip.classList.add('selected');
+            orientationButton.addEventListener('click', () => {
+                if (player.selectedOrientation === 'horizontal') {
+                    player.selectedOrientation = 'vertical';
                 } else {
-                    player.selectedElement = undefined;
-                    wholeShip.classList.remove('selected');
+                    player.selectedOrientation = 'horizontal';
                 }
+                player.selectedElement = undefined;
+                renderAvailableShips(player);
             });
-        });
+
+            return orientationButton;
+        };
+
+        const renderUnusedShips = () => {
+            const target = document.createElement('div');
+            target.classList.toggle('ships-to-place');
+            targetParent.appendChild(target);
+
+            target.textContent = '';
+            target.classList.remove('vertical');
+            target.classList.remove('horizontal');
+            target.classList.add(`${player.selectedOrientation}`);
+
+            const { availableShips } = player.gameboard;
+            availableShips.forEach((ship) => {
+                const wholeShip = document.createElement('div');
+                wholeShip.classList.toggle('ship-container');
+                wholeShip.setAttribute('length', `${ship}`);
+                for (let i = 0; i < ship; i += 1) {
+                    const partOfShip = document.createElement('div');
+                    partOfShip.classList.toggle('available');
+                    partOfShip.classList.toggle('cell');
+                    wholeShip.appendChild(partOfShip);
+                }
+                target.appendChild(wholeShip);
+
+                wholeShip.addEventListener('click', () => {
+                    if (player.selectedElement !== wholeShip) {
+                        for (let i = 0; i < target.children.length; i += 1) {
+                            target.children[i].classList.remove('selected');
+                        }
+                        player.selectedElement = wholeShip;
+                        wholeShip.classList.add('selected');
+                    } else {
+                        player.selectedElement = undefined;
+                        wholeShip.classList.remove('selected');
+                    }
+                });
+            });
+        }
+        // Message above orientation change button
+        targetParent.appendChild(createMessage('Available ships'));
+
+        // Change orientation button and its logic
+        targetParent.appendChild(createOrientationButton());
+
+        // Rendering ships under change orientation button
+        renderUnusedShips();
     };
 
     const listenForShipPlacement = (

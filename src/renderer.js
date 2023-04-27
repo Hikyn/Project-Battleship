@@ -233,10 +233,10 @@ const renderer = (() => {
                             player.selectedElement.getAttribute('length');
                         // console.log(shipLength);
                         // console.log(i, j);
-
+                        // i - 1, j - 1 due to having coordinate (A,B,C...), (1, 2, 3...)
                         player.gameboard.placeShip(
-                            i,
-                            j,
+                            i - 1,
+                            j - 1,
                             shipLength,
                             player.selectedOrientation
                         );

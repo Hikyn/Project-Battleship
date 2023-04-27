@@ -25,6 +25,7 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
         y = Number(y);
         // eslint-disable-next-line no-param-reassign
         shipLength = Number(shipLength);
+        
         if (!availableShips.includes(shipLength)) {
             throw new Error('There are no available ships with that length');
         }
@@ -58,6 +59,7 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
             }
             totalShipsLength += shipLength;
         }
+        console.log(`Ship created at: ${x}|${y}`);
         removeAvailableShip(availableShips.indexOf(shipLength));
     };
 

@@ -112,7 +112,7 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
 
             try {
                 placeShip(randomX, randomY, availableShips[0], orientation);
-                removeAvailableShip(0);
+                console.log(availableShips);
             } catch (error) {
                 randomlyPlaceAllShips();
             }

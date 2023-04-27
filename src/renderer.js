@@ -3,6 +3,7 @@ import { gameboardFactory } from './gameboardFactory';
 const renderer = (() => {
     const renderPlacementScreen = (
         player,
+        enemyPlayer,
         targetParent = player.gameboardElement
     ) => {
         targetParent.textContent = '';
@@ -28,12 +29,18 @@ const renderer = (() => {
         randomButton.textContent = 'Random';
         randomButton.addEventListener('click', () => {
             player.gameboard.randomlyPlaceAllShips();
-            renderPlacementScreen(player, targetParent);
+            renderPlacementScreen(player, enemyPlayer, targetParent);
         });
 
         const finishButton = document.createElement('button');
         finishButton.classList.add('btn-finish');
         finishButton.textContent = 'Finish';
+        finishButton.addEventListener('click', () => {
+            renderGameboard(player);
+
+            renderGameboard(enemyPlayer);
+            listenForAttacks(enemyPlayer, player);
+        });
 
         const resetButton = document.createElement('button');
         resetButton.classList.add('btn-reset');
@@ -175,7 +182,8 @@ const renderer = (() => {
                         );
                         return;
                     }
-                    defendingPlayer.gameboard.receiveAttack(i, j);
+                    // i - 1, j - 1 compensating for Coordinates(A,B,C) (1,2,3)
+                    defendingPlayer.gameboard.receiveAttack(i - 1, j - 1);
                     if (defendingPlayer.isLost()) {
                         console.log(`Player ${defendingPlayer.name} loses!`);
                     }

@@ -12,8 +12,6 @@ function gameloop(gameboardLength) {
     // renderer.renderGameboard(player1);
     // renderer.renderAvailableShips(player1);
 
-    renderer.renderPlacementScreen(player1);
-
     const gameboard2 = gameboardFactory(gameboardLength);
     target = document.querySelector('.gameboard-enemy');
     const player2 = playerFactory('Computer', gameboard2, target, true);
@@ -21,6 +19,8 @@ function gameloop(gameboardLength) {
 
     // renderer.renderGameboard(player2);
     // renderer.listenForAttacks(player2, player1);
+
+    renderer.renderPlacementScreen(player1, player2);
 }
 
 export { gameloop };

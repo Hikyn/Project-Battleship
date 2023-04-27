@@ -34,43 +34,97 @@ const renderer = (() => {
             player,
             document.querySelector('.pop-Up-AvailableShips')
         );
-    }
+    };
 
     const renderGameboard = (
         player,
         targetParent = player.gameboardElement
     ) => {
+        const createCoordinateColumn = () => {
+            const newColumnElement = createColumn();
+            let newCellElement;
+            for (let i = -1; i < player.gameboard.length; i += 1) {
+                if (i === -1) {
+                    newCellElement = document.createElement('div');
+                    newCellElement.classList.toggle('cell');
+                    newCellElement.classList.toggle('null');
+                } else {
+                    newCellElement = document.createElement('div');
+                    newCellElement.classList.toggle('cell');
+                    newCellElement.textContent = `${i + 1}`;
+                }
+                newColumnElement.appendChild(newCellElement);
+            }
+
+            return newColumnElement;
+        };
+
+        const createColumn = () => {
+            const newColumnElement = document.createElement('div');
+            newColumnElement.classList.toggle('column');
+
+            return newColumnElement;
+        };
+
+        const createAlphabetCell = (letter) => {
+            const charcode = 65 + Number(letter);
+            const char = String.fromCharCode(charcode);
+            const newCellElement = document.createElement('div');
+            newCellElement.classList.toggle('cell');
+            newCellElement.textContent = char;
+
+            return newCellElement;
+        };
+
+        const createGameboardCell = (x, y) => {
+            const cell = player.gameboard.cells[x][y];
+
+            const newCellElement = document.createElement('button');
+            newCellElement.classList.toggle('cell');
+
+            if (player.gameboard.isCellHit(x, y)) {
+                newCellElement.classList.toggle('hit');
+            }
+
+            if (cell === 0) {
+                // newCellElement.textContent = 0;
+                newCellElement.classList.toggle('empty');
+            } else {
+                newCellElement.classList.toggle('ship');
+
+                if (cell.isSunk()) {
+                    newCellElement.classList.toggle('sunk');
+                }
+            }
+
+            return newCellElement;
+        };
         // Renders gameboard and appends to target element
         targetParent.textContent = '';
-        let x = 0;
-        player.gameboard.cells.forEach((column) => {
-            let y = 0;
-            const columnElement = document.createElement('div');
-            columnElement.classList.toggle('column');
-            column.forEach((cell) => {
-                const cellElement = document.createElement('button');
-                cellElement.classList.toggle('cell');
-                // If cell was hit before, we will style it appropriately
-                if (player.gameboard.isCellHit(x, y)) {
-                    cellElement.classList.toggle('hit');
-                }
 
-                if (cell === 0) {
-                    // cellElement.textContent = 0;
-                    cellElement.classList.toggle('empty');
-                } else {
-                    cellElement.classList.toggle('ship');
+        let columnElement;
+        let cellElement;
 
-                    if (player.gameboard.cells[x][y].isSunk()) {
-                        cellElement.classList.toggle('sunk');
+        for (let x = -1; x < player.gameboard.cells.length; x += 1) {
+            // If it is a first column, we create coordinate column
+            if (x === -1) {
+                columnElement = createCoordinateColumn();
+            } else {
+                // Else we create usual column and populate it
+                columnElement = createColumn();
+
+                for (let y = -1; y < player.gameboard.cells.length; y += 1) {
+                    // First row will get a letter
+                    if (y === -1) {
+                        cellElement = createAlphabetCell(x);
+                    } else {
+                        cellElement = createGameboardCell(x, y);
                     }
+                    columnElement.appendChild(cellElement);
                 }
-                columnElement.appendChild(cellElement);
-                y += 1;
-            });
-            x += 1;
+            }
             targetParent.appendChild(columnElement);
-        });
+        }
         listenForShipPlacement(player, targetParent);
     };
 

@@ -26,6 +26,10 @@ const renderer = (() => {
         const randomButton = document.createElement('button');
         randomButton.classList.add('btn-retry');
         randomButton.textContent = 'Random';
+        randomButton.addEventListener('click', () => {
+            player.gameboard.randomlyPlaceAllShips();
+            renderPlacementScreen(player, targetParent);
+        });
 
         const finishButton = document.createElement('button');
         finishButton.classList.add('btn-finish');

@@ -7,4 +7,4 @@ import { gameloop } from './gameLoop.js';
 
 console.log('Scripts are working');
 
-gameloop(6);
+gameloop(7);

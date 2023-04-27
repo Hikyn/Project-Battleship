@@ -1,7 +1,46 @@
 const renderer = (() => {
-    const renderGameboard = (player) => {
+    const renderPlacementScreen = (
+        player,
+        targetParent = player.gameboardElement
+    ) => {
+        targetParent.textContent = '';
+
+        const popUpScreen = document.createElement('div');
+        popUpScreen.classList.add('pop-Up-Screen');
+
+        const popUpTitle = document.createElement('div');
+        popUpTitle.textContent = `Admiral ${player.name}, place your ships!`;
+        popUpTitle.classList.add('title');
+
+        const popUpMain = document.createElement('div');
+        popUpMain.classList.add('main');
+
+        const popUpGameboard = document.createElement('div');
+        popUpGameboard.classList.add('gameboard');
+
+        const popUpAvailableShips = document.createElement('div');
+        popUpAvailableShips.classList.add('pop-Up-AvailableShips');
+
+        popUpMain.appendChild(popUpGameboard);
+        popUpMain.appendChild(popUpAvailableShips);
+
+        popUpScreen.appendChild(popUpTitle);
+        popUpScreen.appendChild(popUpMain);
+
+        targetParent.appendChild(popUpScreen);
+
+        renderGameboard(player, popUpGameboard);
+        renderAvailableShips(
+            player,
+            document.querySelector('.pop-Up-AvailableShips')
+        );
+    }
+
+    const renderGameboard = (
+        player,
+        targetParent = player.gameboardElement
+    ) => {
         // Renders gameboard and appends to target element
-        const targetParent = player.gameboardElement;
         targetParent.textContent = '';
         let x = 0;
         player.gameboard.cells.forEach((column) => {
@@ -32,7 +71,7 @@ const renderer = (() => {
             x += 1;
             targetParent.appendChild(columnElement);
         });
-        listenForShipPlacement(player);
+        listenForShipPlacement(player, targetParent);
     };
 
     const listenForAttacks = (defendingPlayer, attackingPlayer) => {
@@ -66,18 +105,20 @@ const renderer = (() => {
         }
     };
 
-    const renderAvailableShips = (player) => {
-        const fleet = document.querySelector('.fleet');
-        fleet.textContent = '';
+    const renderAvailableShips = (
+        player,
+        targetParent = document.querySelector('.pop-Up-AvailableShips')
+    ) => {
+        targetParent.textContent = '';
 
         const message = document.createElement('div');
         message.textContent = 'Available ships';
-        fleet.appendChild(message);
+        targetParent.appendChild(message);
 
         const changeOrientation = document.createElement('button');
         changeOrientation.classList.add('button-orientation');
         changeOrientation.textContent = player.selectedOrientation;
-        fleet.appendChild(changeOrientation);
+        targetParent.appendChild(changeOrientation);
         changeOrientation.addEventListener('click', () => {
             if (player.selectedOrientation === 'horizontal') {
                 player.selectedOrientation = 'vertical';
@@ -89,7 +130,7 @@ const renderer = (() => {
 
         const target = document.createElement('div');
         target.classList.toggle('ships-to-place');
-        fleet.appendChild(target);
+        targetParent.appendChild(target);
 
         target.textContent = '';
         target.classList.remove('vertical');
@@ -123,9 +164,11 @@ const renderer = (() => {
         });
     };
 
-    const listenForShipPlacement = (player) => {
-        const target = player.gameboardElement;
-        const columns = target.children;
+    const listenForShipPlacement = (
+        player,
+        targetParent = player.gameboardElement
+    ) => {
+        const columns = targetParent.children;
         for (let i = 0; i < columns.length; i += 1) {
             const column = columns[i];
             const cells = column.children;
@@ -149,7 +192,7 @@ const renderer = (() => {
                             );
                         player.gameboard.removeAvailableShip(removeIndex);
 
-                        renderGameboard(player);
+                        renderGameboard(player, targetParent);
                         renderAvailableShips(player);
                     }
                 });
@@ -157,6 +200,7 @@ const renderer = (() => {
         }
     };
     return {
+        renderPlacementScreen,
         renderGameboard,
         listenForAttacks,
         renderAvailableShips,

@@ -178,3 +178,30 @@ button.cell.empty.hit:hover {
 .gameboard-enemy .ship {
   --rgb: 250, 215, 170;
 }
+
+.pop-Up-Screen {
+  background-color: rgb(154, 169, 184);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  padding: 2rem;
+}
+
+.pop-Up-Screen .main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 3rem;
+  
+}
+
+.pop-Up-Screen .title {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+

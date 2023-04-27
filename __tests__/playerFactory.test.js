@@ -4,7 +4,7 @@ import { gameboardFactory } from '../src/gameboardFactory';
 
 test('Player: check if all ships are placed', () => {
     const gameboard1 = gameboardFactory(6, [5, 4, 3, 2]);
-    let target = '.gameboard-self';
+    const target = '.gameboard-self';
     const player1 = playerFactory('Me', gameboard1, target);
     expect(player1.isAllShipsPlaced()).toBe(false);
 

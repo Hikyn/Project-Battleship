@@ -96,7 +96,7 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
             availableShips.splice(index, 1);
             // console.log(availableShips);
         }
-    }
+    };
 
     const randomlyPlaceAllShips = () => {
         while (availableShips.length > 0) {
@@ -117,7 +117,7 @@ const gameboardFactory = (length, availableShips = [5, 4, 3, 2]) => {
                 randomlyPlaceAllShips();
             }
         }
-    }
+    };
     return {
         cells,
         receiveAttack,

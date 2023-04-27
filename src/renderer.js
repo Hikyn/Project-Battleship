@@ -1,6 +1,3 @@
-import { shipFactory } from './shipFactory.js';
-import { gameboardFactory } from './gameboardFactory.js';
-
 const renderer = (() => {
     const renderGameboard = (player) => {
         // Renders gameboard and appends to target element
@@ -47,8 +44,12 @@ const renderer = (() => {
             for (let j = 0; j < cells.length; j += 1) {
                 cells[j].addEventListener('click', () => {
                     if (!attackingPlayer.isAllShipsPlaced()) {
-                        console.log(`Player ${attackingPlayer.name} has not finished placing ships`);
-                        console.log(`Remaining ships: ${attackingPlayer.gameboard.availableShips}`);
+                        console.log(
+                            `Player ${attackingPlayer.name} has not finished placing ships`
+                        );
+                        console.log(
+                            `Remaining ships: ${attackingPlayer.gameboard.availableShips}`
+                        );
                         return;
                     }
                     defendingPlayer.gameboard.receiveAttack(i, j);
@@ -154,7 +155,7 @@ const renderer = (() => {
                 });
             }
         }
-    }
+    };
     return {
         renderGameboard,
         listenForAttacks,

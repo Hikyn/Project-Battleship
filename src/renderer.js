@@ -24,6 +24,7 @@ const renderer = (() => {
                     cellElement.classList.toggle('empty');
                 } else {
                     cellElement.classList.toggle('ship');
+
                     if (player.gameboard.cells[x][y].isSunk()) {
                         cellElement.classList.toggle('sunk');
                     }

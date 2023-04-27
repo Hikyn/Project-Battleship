@@ -174,3 +174,7 @@ button.cell.empty.hit:hover {
   width: 6rem;
   padding: 1rem;
 }
+
+.gameboard-enemy .ship {
+  --rgb: 250, 215, 170;
+}

@@ -190,10 +190,10 @@ button.cell.empty.hit:hover {
 
 .pop-Up-Screen .main {
   display: grid;
-  margin-left: max(20rem, 10vw);
-  margin-right: max(20rem, 10vw);
-  grid: 1fr / 1fr 1fr;
-  gap: 2rem;
+  margin-left: min(20rem, 20vw);
+  margin-right: min(20rem, 20vw);
+  grid: 1fr / minmax(0, 1fr) minmax(0, 1fr);
+  gap: 15rem;
   justify-content: center;
 }
 

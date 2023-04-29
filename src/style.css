@@ -231,3 +231,7 @@ button.cell.empty.hit:hover {
   background-color: rgba(128, 128, 128, 0.514);
   border: none;
 }
+
+.ready-message {
+  font-size: 2rem;
+}

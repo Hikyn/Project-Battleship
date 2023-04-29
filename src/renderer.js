@@ -271,14 +271,17 @@ const renderer = (() => {
 
         const colorFinishButton = () => {
             const finishButton = document.querySelector('.btn-finish');
-            if (
-                finishButton !== undefined &&
-                player.gameboard.availableShips.length > 0
-            ) {
-                finishButton.classList.add('grayed');
-            } else if (finishButton !== undefined) {
+            if (finishButton !== undefined) {
                 finishButton.classList.remove('grayed');
             }
+        };
+
+        const renderReadyMessage = () => {
+            const rightSide = document.querySelector(
+                '.main .pop-Up-AvailableShips'
+            );
+            rightSide.classList.add('ready-message');
+            rightSide.textContent = 'Your fleet is ready for battle!';
         };
         // Message above orientation change button
         targetParent.appendChild(createMessage('Available ships'));
@@ -289,8 +292,12 @@ const renderer = (() => {
         // Rendering ships under change orientation button
         renderUnusedShips();
 
-        colorFinishButton();
+        if (player.gameboard.availableShips.length <= 0) {
+            colorFinishButton();
+            renderReadyMessage();
+        };
 
+        
     };
 
     const listenForShipPlacement = (

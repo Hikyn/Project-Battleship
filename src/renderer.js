@@ -188,14 +188,35 @@ const renderer = (() => {
                     }
                     // i - 1, j - 1 compensating for Coordinates(A,B,C) (1,2,3)
                     defendingPlayer.gameboard.receiveAttack(i - 1, j - 1);
+                    renderGameboard(defendingPlayer);
+
                     if (defendingPlayer.isLost()) {
                         console.log(`Player ${defendingPlayer.name} loses!`);
+                        const body = document.querySelector('body');
+                        const main = document.querySelector('body .main');
+
+                        const winner = document.createElement('div');
+                        winner.classList.add('winner-message');
+                        winner.textContent = `Player ${attackingPlayer.name} won this battle!`;
+
+                        body.insertBefore(winner, main);
+                    } else {
+                        listenForAttacks(defendingPlayer, attackingPlayer);
                     }
-                    renderGameboard(defendingPlayer);
-                    listenForAttacks(defendingPlayer, attackingPlayer);
                     // Ai makes a move
                     defendingPlayer.makeMove(attackingPlayer);
                     renderGameboard(attackingPlayer);
+                    if (attackingPlayer.isLost()) {
+                        console.log(`Player ${attackingPlayer.name} loses!`);
+                        const body = document.querySelector('body');
+                        const main = document.querySelector('body .main');
+
+                        const winner = document.createElement('div');
+                        winner.classList.add('winner-message');
+                        winner.textContent = `Player ${defendingPlayer.name} won this battle!`;
+
+                        body.insertBefore(winner, main);
+                    }
                 });
             }
         }
@@ -295,9 +316,7 @@ const renderer = (() => {
         if (player.gameboard.availableShips.length <= 0) {
             colorFinishButton();
             renderReadyMessage();
-        };
-
-        
+        }
     };
 
     const listenForShipPlacement = (

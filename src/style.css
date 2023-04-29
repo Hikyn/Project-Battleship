@@ -235,3 +235,8 @@ button.cell.empty.hit:hover {
 .ready-message {
   font-size: 2rem;
 }
+
+.winner-message {
+  font-size: 3rem;
+  text-align: center;
+}

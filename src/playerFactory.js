@@ -1,6 +1,6 @@
 const playerFactory = (name, gameboard, gameboardElement, isAi = false) => {
     let selectedElement;
-    let selectedOrientation = 'horizontal';
+    const selectedOrientation = 'horizontal';
 
     const makeMove = (enemyPlayer) => {
         const randomX = Math.floor(Math.random() * gameboard.length);

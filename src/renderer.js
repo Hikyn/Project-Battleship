@@ -34,12 +34,16 @@ const renderer = (() => {
 
         const finishButton = document.createElement('button');
         finishButton.classList.add('btn-finish');
+        finishButton.classList.add('grayed');
         finishButton.textContent = 'Finish';
         finishButton.addEventListener('click', () => {
-            renderGameboard(player);
+            if (player.gameboard.availableShips.length <= 0) {
+                renderGameboard(player);
 
-            renderGameboard(enemyPlayer);
-            listenForAttacks(enemyPlayer, player);
+                renderGameboard(enemyPlayer);
+                listenForAttacks(enemyPlayer, player);
+            }
+
         });
 
         const resetButton = document.createElement('button');
@@ -263,7 +267,19 @@ const renderer = (() => {
                     }
                 });
             });
-        }
+        };
+
+        const colorFinishButton = () => {
+            const finishButton = document.querySelector('.btn-finish');
+            if (
+                finishButton !== undefined &&
+                player.gameboard.availableShips.length > 0
+            ) {
+                finishButton.classList.add('grayed');
+            } else if (finishButton !== undefined) {
+                finishButton.classList.remove('grayed');
+            }
+        };
         // Message above orientation change button
         targetParent.appendChild(createMessage('Available ships'));
 
@@ -272,6 +288,9 @@ const renderer = (() => {
 
         // Rendering ships under change orientation button
         renderUnusedShips();
+
+        colorFinishButton();
+
     };
 
     const listenForShipPlacement = (

@@ -12,9 +12,6 @@ html {
     color: red;
 }
 
-body {
-  height: 100vh;
-}
 
 .main {
   display: flex;
@@ -186,16 +183,17 @@ button.cell.empty.hit:hover {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+
+  min-height: 100vh;
   text-align: center;
-  padding: 2rem;
 }
 
 .pop-Up-Screen .main {
   display: grid;
-  margin-left: 20rem;
-  margin-right: 20rem;
+  margin-left: max(20rem, 10vw);
+  margin-right: max(20rem, 10vw);
   grid: 1fr / 1fr 1fr;
+  gap: 2rem;
   justify-content: center;
 }
 
@@ -227,4 +225,9 @@ button.cell.empty.hit:hover {
   width: 5rem;
   height: 5rem;
   text-align: center;
+}
+
+.grayed {
+  background-color: rgba(128, 128, 128, 0.514);
+  border: none;
 }

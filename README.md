@@ -97,6 +97,14 @@ expect(() => { gameboard.placeShip(x, y, shipLength, orientation); }).toThrow("O
 > 
 > --- **[scorgn](https://stackoverflow.com/users/2087587/scorgn)** on [this thread](https://stackoverflow.com/questions/49027595/jest-test-that-exception-will-be-thrown-isnt-working)
 
+### Grid and minimum cell content
+> In the ideal case, the two cells will have the same size.
+>
+> But every cell has a minimum size! It is defined as the minimum content width. For example: the larger word, the larger button, or the larger image that it contains.
+>
+> To avoid this, we should use minmax(0, 1fr) for each column definition. It allows us to say that 1fr, one fraction, is the maximum width of the column. 
+>--- **[tzi](https://stackoverflow.com/users/1978945/tzi)** on [this thread](https://stackoverflow.com/questions/54099056/grid-display-columns-have-not-equal-width)
+
 ## TO DO: Main game loop
 
 ### Start

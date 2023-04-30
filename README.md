@@ -30,11 +30,27 @@ Test Driven Development practice.
 https://hikyn.github.io/Project-Battleship/
 
 # ToC
-
+-   [Demo gif](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#demo-gif)
+-   [Features](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#features)
 -   [Problems Encountered](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#problems-encountered)
     -   [Jest and webpack](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#problems-encountered)
     -   [Jest and weird way to catch errors](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#jest-and-weird-way-to-catch-errors)
     -   [Grid and minimum cell content](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#grid-and-minimum-cell-content)
+
+# Demo gif
+<h4>Placement screen</h4>
+
+![](assets/placementScreen.gif)
+
+<h4>Battle</h4>
+
+![](assets/battle.gif)
+
+## Features:
+- Interactive browser-based game
+- Tests for all backend logic
+- Mobile friendly
+- Separated DOM and backend _as much as possible_
 
 ## Problems encountered:
 

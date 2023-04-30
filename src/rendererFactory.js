@@ -1,81 +1,7 @@
-import { gameboardFactory } from './gameboardFactory';
+import { placementScreenFactory } from './placementScreenFactory';
 
-const renderer = (() => {
-    const renderPlacementScreen = (
-        player,
-        enemyPlayer,
-        targetParent = player.gameboardElement
-    ) => {
-        targetParent.textContent = '';
-
-        const popUpScreen = document.createElement('div');
-        popUpScreen.classList.add('pop-Up-Screen');
-
-        const popUpTitle = document.createElement('div');
-        popUpTitle.textContent = `Admiral ${player.name}, place your ships!`;
-        popUpTitle.classList.add('title');
-
-        const popUpMain = document.createElement('div');
-        popUpMain.classList.add('main');
-
-        const popUpGameboard = document.createElement('div');
-        popUpGameboard.classList.add('gameboard');
-
-        const popUpAvailableShips = document.createElement('div');
-        popUpAvailableShips.classList.add('pop-Up-AvailableShips');
-
-        const randomButton = document.createElement('button');
-        randomButton.classList.add('btn-retry');
-        randomButton.textContent = 'Random';
-        randomButton.addEventListener('click', () => {
-            player.gameboard.randomlyPlaceAllShips();
-            renderPlacementScreen(player, enemyPlayer, targetParent);
-        });
-
-        const finishButton = document.createElement('button');
-        finishButton.classList.add('btn-finish');
-        finishButton.classList.add('grayed');
-        finishButton.textContent = 'Finish';
-        finishButton.addEventListener('click', () => {
-            if (player.gameboard.availableShips.length <= 0) {
-                renderGameboard(player);
-
-                renderGameboard(enemyPlayer);
-                listenForAttacks(enemyPlayer, player);
-            }
-
-        });
-
-        const resetButton = document.createElement('button');
-        resetButton.classList.add('btn-reset');
-        resetButton.textContent = 'Reset';
-        resetButton.addEventListener('click', () => {
-            player.gameboard = gameboardFactory(player.gameboard.length);
-            renderPlacementScreen(player, targetParent);
-        });
-
-        const buttons = document.createElement('div');
-        buttons.classList.add('btns');
-
-        buttons.appendChild(randomButton);
-        buttons.appendChild(finishButton);
-        buttons.appendChild(resetButton);
-
-        popUpMain.appendChild(popUpGameboard);
-        popUpMain.appendChild(popUpAvailableShips);
-
-        popUpScreen.appendChild(popUpTitle);
-        popUpScreen.appendChild(popUpMain);
-        popUpScreen.appendChild(buttons);
-
-        targetParent.appendChild(popUpScreen);
-
-        renderGameboard(player, popUpGameboard);
-        renderAvailableShips(
-            player,
-            document.querySelector('.pop-Up-AvailableShips')
-        );
-    };
+const rendererFactory = (player, enemyPlayer) => {
+    const placementScreen = placementScreenFactory(player);
 
     const renderGameboard = (
         player,
@@ -169,7 +95,7 @@ const renderer = (() => {
         listenForShipPlacement(player, targetParent);
     };
 
-    const listenForAttacks = (defendingPlayer, attackingPlayer) => {
+    const runAttackLoop = (defendingPlayer, attackingPlayer) => {
         const target = defendingPlayer.gameboardElement;
         const columns = target.children;
         for (let i = 0; i < columns.length; i += 1) {
@@ -197,11 +123,11 @@ const renderer = (() => {
 
                         const winner = document.createElement('div');
                         winner.classList.add('winner-message');
-                        winner.textContent = `Player ${attackingPlayer.name} won this battle!`;
+                        winner.textContent = `We won this battle!`;
 
                         body.insertBefore(winner, main);
                     } else {
-                        listenForAttacks(defendingPlayer, attackingPlayer);
+                        runAttackLoop(defendingPlayer, attackingPlayer);
                     }
                     // Ai makes a move
                     defendingPlayer.makeMove(attackingPlayer);
@@ -355,12 +281,12 @@ const renderer = (() => {
         }
     };
     return {
-        renderPlacementScreen,
         renderGameboard,
-        listenForAttacks,
+        runAttackLoop,
         renderAvailableShips,
-        listenForShipPlacement
+        listenForShipPlacement,
+        placementScreen
     };
-})();
+};
 
-export { renderer };
+export { rendererFactory };

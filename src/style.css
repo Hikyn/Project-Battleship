@@ -221,8 +221,12 @@ and (max-width: 700px)
   .pop-Up-Screen .main {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0.5rem;
     justify-content: center;
+  }
+
+  .gameboard .pop-Up-Screen .title {
+    margin-bottom: 0.5rem;
   }
 
   .pop-Up-Screen .main .gameboard {

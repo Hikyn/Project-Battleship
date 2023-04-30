@@ -26,6 +26,9 @@
 
 Test Driven Development practice.
 
+# Live demo
+https://hikyn.github.io/Project-Battleship/
+
 # ToC
 
 -   [Problems Encountered](https://github.com/Hikyn/Project-Battleship/edit/main/README.md#problems-encountered)

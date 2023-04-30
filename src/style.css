@@ -1,6 +1,8 @@
 html {
   box-sizing: border-box;
   font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(#e2eeff, #9198e5);
+  min-height: 100vh;
 }
 *,
 *::before,
@@ -11,7 +13,6 @@ html {
 .hello {
     color: red;
 }
-
 
 .main {
   display: flex;
@@ -176,7 +177,7 @@ button.cell.empty.hit:hover {
 }
 
 .pop-Up-Screen {
-  background-color: rgb(154, 169, 184);
+  background: linear-gradient(#e2eeff, #9198e5);
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -238,5 +239,10 @@ button.cell.empty.hit:hover {
 
 .winner-message {
   font-size: 3rem;
+  text-align: center;
+}
+
+.name {
+  font-size: 1.5rem;
   text-align: center;
 }

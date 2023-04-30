@@ -198,6 +198,63 @@ button.cell.empty.hit:hover {
   justify-content: center;
 }
 
+@media only screen 
+and (max-width: 700px)
+{
+  body .main {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main .your-side,
+  .main .enemy-side {
+    margin: 0px;
+  }
+
+  .main .your-side .cell,
+  .main .enemy-side .cell {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .pop-Up-Screen .main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .pop-Up-Screen .main .gameboard {
+    margin: 0rem 4rem;
+    flex-shrink: 1;
+  }
+
+  .pop-Up-Screen .column {
+    flex-shrink: 1;
+    width: 2.5rem;
+  }
+
+  .pop-Up-Screen .cell {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .pop-Up-Screen .btns {
+    margin: 1rem 0px;
+    grid: 1fr / 1fr 1fr 1fr;
+    padding: 0px 1rem;
+    justify-content: center;
+    gap: 0px;
+  }
+
+  .btns .btn-random,
+  .btns .btn-finish,
+  .btns .btn-reset {
+    width: auto;
+  }
+}
+
 .pop-Up-Screen .main .gameboard {
   display: flex;
   justify-content: center;

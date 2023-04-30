@@ -307,3 +307,7 @@ and (max-width: 700px)
   font-size: 1.5rem;
   text-align: center;
 }
+
+.description p {
+  margin: 0px;
+}

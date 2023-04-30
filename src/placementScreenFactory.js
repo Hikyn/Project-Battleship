@@ -14,6 +14,10 @@ const placementScreenFactory = (player) => {
         popUpTitle.textContent = `Admiral, place your ships!`;
         popUpTitle.classList.add('title');
 
+        const popUpDescription = document.createElement('div');
+        popUpDescription.innerHTML = `<p>1. Select a ship<p><p>2. Click on a cell</p>`;
+        popUpDescription.classList.add('description');
+
         const popUpMain = document.createElement('div');
         popUpMain.classList.add('main');
 
@@ -47,6 +51,7 @@ const placementScreenFactory = (player) => {
         popUpMain.appendChild(popUpAvailableShips);
 
         popUpScreen.appendChild(popUpTitle);
+        popUpScreen.appendChild(popUpDescription);
         popUpScreen.appendChild(popUpMain);
         popUpScreen.appendChild(buttons);
 
